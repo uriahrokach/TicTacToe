@@ -62,6 +62,17 @@ public class Board {
     }
 
     public Shape checkWinner(){
+        Shape[] results = new Shape[4];
+
+        results[0] = checkHorizontal();
+        results[1] = checkVertical();
+        results[2] = checkMainDiagonal();
+        results[3] = checkSecondaryDiagonal();
+
+        for(Shape res : results){
+            if(res != null)
+                return res;
+        }
 
         return null;
     }
