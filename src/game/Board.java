@@ -62,23 +62,51 @@ public class Board {
     }
 
     public Shape checkWinner(){
+
+        return null;
+    }
+
+    private Shape checkHorizontal(){
         for(Shape[] row : board){
-            if(row[0] == row[1] &&  row[1] == row[2])
-                return row[0];
+            for (Shape col: row) {
+                if (row[0] != col)
+                    break;
+                if (col == row[row.length-1])
+                    return col;
+            }
         }
-        for (int y = 0; y<board[0].length;y++){
-            if(board[0][y] == board[1][y]&& board[1][y] == board[2][y])
-                return board[0][y];
-        }
+        return null;
+    }
 
-        if(board[0][0] == board[1][1]&& board[1][1] == board[2][2]){
-            return board[0][0];
+    private Shape checkVertical(){
+        for (int y = 0; y<board[0].length; y++){
+            for(int x = 0; x< board.length; x++){
+                if (board[0][y] != board[x][y])
+                    break;
+                if (x == (board.length-1))
+                    return board[x][y];
+            }
         }
+        return null;
+    }
 
-        if(board[0][2] == board[1][1]&& board[1][1] == board[2][0]){
-            return board[0][0];
+    private Shape checkMainDiagonal(){
+        for(int p = 0; p<board.length;p++){
+            if (board[p][p] != board[0][0])
+                break;
+            if (p == (board.length-1))
+                return board[p][p];
         }
+        return null;
+    }
 
+    private Shape checkSecondaryDiagonal(){
+        for(int p = 0; p<board.length; p++){
+            if (board[p][board[p].length - 1 - p] != board[board[p].length - 1][0])
+                break;
+            if (p == (board.length-1))
+                return board[board.length-1][p];
+        }
         return null;
     }
 
