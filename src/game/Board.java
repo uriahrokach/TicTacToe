@@ -16,7 +16,6 @@ public class Board {
         this(SIDE_LENGTH);
     }
 
-
     public static Board getInstance() {
         if (firstInstance == null) {
             firstInstance = new Board();
