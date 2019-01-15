@@ -5,37 +5,23 @@ import java.util.*;
 public class Game {
 
     public static Scanner input = new Scanner(System.in);
-    public static Shape winner = null;
 
     public static void main(String[] args) {
-        game();
+        Shape winner = game();
+        System.out.println("The winner is: "+winner.toString());
     }
 
-    public static void game(){
+    public static Shape game(){
         boolean gameIsOn = true;
-
         while(gameIsOn){
-            System.out.println("X, enter coordinates:");
-            int x = input.nextInt();
-            int y = input.nextInt();
-            Board.getInstance().setX(x, y);
-
-            Board.getInstance().printBoard();
-            winner = Board.getInstance().checkWinner();
-            if(winner != null)
-                gameIsOn = false;
-            else{
-                System.out.println("O, enter coordinates:");
-                x = input.nextInt();
-                y = input.nextInt();
-                Board.getInstance().setX(x, y);
-
-                Board.getInstance().printBoard();
-                winner = Board.getInstance().checkWinner();
-                if(winner!=null)
-                    gameIsOn = false;
-            }
+            turn(Shape.X);
+            if(Board.getInstance().checkWinner()!= null)
+                return Shape.X;
+            turn(Shape.O);
+            if(Board.getInstance().checkWinner()!= null)
+                return Shape.O;
         }
+        return null;
     }
 
     public static void turn(Shape currentPlayer){
